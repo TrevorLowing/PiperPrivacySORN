@@ -1,0 +1,158 @@
+/**
+ * Federal Register Preview Styles
+ */
+
+.fr-preview-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Validation Section */
+.fr-preview-validation {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    background: #f8f9fa;
+}
+
+.fr-preview-errors {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 4px solid #dc3545;
+    background: #fff;
+}
+
+.fr-preview-warnings {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 4px solid #ffc107;
+    background: #fff;
+}
+
+.fr-preview-suggestions {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 4px solid #17a2b8;
+    background: #fff;
+}
+
+.fr-preview-validation h4 {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fr-preview-validation ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.fr-preview-validation li {
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Preview Content */
+.fr-preview-content {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.fr-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.fr-preview-header h3 {
+    margin: 0;
+    color: #23282d;
+    font-size: 1.3em;
+}
+
+.fr-preview-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.fr-preview-actions button {
+    padding: 5px 15px;
+}
+
+.fr-preview-text {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Metadata Section */
+.fr-preview-metadata {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.fr-preview-metadata h4 {
+    margin: 0 0 15px;
+    color: #23282d;
+    font-size: 1.1em;
+}
+
+.fr-preview-metadata table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fr-preview-metadata th {
+    width: 200px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    text-align: left;
+    font-weight: 600;
+}
+
+.fr-preview-metadata td {
+    padding: 8px 12px;
+}
+
+.fr-preview-metadata tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* Print Styles */
+@media print {
+    .fr-preview-container {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .fr-preview-validation,
+    .fr-preview-actions {
+        display: none;
+    }
+
+    .fr-preview-content {
+        padding: 0;
+        border: none;
+    }
+
+    .fr-preview-text {
+        padding: 0;
+        border: none;
+        background: none;
+    }
+}

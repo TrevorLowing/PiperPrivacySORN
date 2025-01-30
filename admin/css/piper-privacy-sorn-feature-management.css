@@ -1,0 +1,185 @@
+/**
+ * Feature Management Styles
+ */
+
+.feature-management-container {
+    margin: 20px 0;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.feature-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.feature-description {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* Feature Toggle Switch */
+.feature-toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.feature-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.feature-toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.feature-toggle .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.feature-toggle input:checked + .slider {
+    background-color: #2271b1;
+}
+
+.feature-toggle input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Dependencies */
+.feature-dependencies {
+    margin: 15px 0;
+    font-size: 13px;
+}
+
+.feature-dependencies ul {
+    margin: 5px 0 0 20px;
+    list-style-type: disc;
+}
+
+/* Roles */
+.feature-roles {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.feature-roles strong {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.feature-roles label {
+    display: block;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.feature-roles input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Disabled State */
+.feature-card.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.feature-card.disabled .feature-toggle input {
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        margin-bottom: 15px;
+    }
+
+    .feature-roles label {
+        padding: 8px 0;
+    }
+}
+
+/* Loading State */
+.feature-card.loading {
+    position: relative;
+}
+
+.feature-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-card.loading::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #2271b1;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: feature-loading 0.6s linear infinite;
+    z-index: 1;
+}
+
+@keyframes feature-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}

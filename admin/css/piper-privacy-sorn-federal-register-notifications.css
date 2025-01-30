@@ -1,0 +1,73 @@
+/**
+ * Federal Register Notification Settings Styles
+ */
+
+.fr-notification-templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.fr-template-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.fr-template-card h3 {
+    margin: 0 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #23282d;
+}
+
+.fr-template-field {
+    margin-bottom: 15px;
+}
+
+.fr-template-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.fr-template-field input[type="text"],
+.fr-template-field textarea {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.fr-template-field textarea {
+    min-height: 100px;
+    font-family: monospace;
+}
+
+/* Test Notification Section */
+.fr-notification-test {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.fr-notification-test h2 {
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.fr-notification-test p {
+    margin-bottom: 15px;
+}
+
+.fr-notification-test select {
+    margin-right: 10px;
+}
+
+.fr-notification-test .spinner {
+    float: none;
+    margin: 0 0 0 10px;
+}

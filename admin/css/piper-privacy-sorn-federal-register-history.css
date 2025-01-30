@@ -1,0 +1,190 @@
+/**
+ * Federal Register History Styles
+ */
+
+/* Submission Details */
+.fr-submission-details {
+    max-width: 1200px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.fr-submission-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.fr-submission-header h2 {
+    margin: 0 0 10px;
+    color: #23282d;
+}
+
+.fr-submission-meta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: #666;
+}
+
+.fr-submission-id {
+    font-family: monospace;
+}
+
+/* Status Badges */
+.fr-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.status-submitted { background: #e3f2fd; color: #0d47a1; }
+.status-in_review { background: #fff3e0; color: #e65100; }
+.status-approved { background: #e8f5e9; color: #1b5e20; }
+.status-scheduled { background: #f3e5f5; color: #4a148c; }
+.status-published { background: #e8f5e9; color: #1b5e20; }
+.status-rejected { background: #ffebee; color: #b71c1c; }
+.status-error { background: #ffebee; color: #b71c1c; }
+
+/* Timeline */
+.fr-submission-timeline {
+    margin: 30px 0;
+}
+
+.fr-timeline {
+    position: relative;
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.fr-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.fr-timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.fr-timeline-marker {
+    position: absolute;
+    left: -34px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0073aa;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #0073aa;
+}
+
+.event-error .fr-timeline-marker {
+    background: #dc3545;
+    box-shadow: 0 0 0 2px #dc3545;
+}
+
+.fr-timeline-content {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.fr-timeline-date {
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 12px;
+}
+
+.fr-timeline-content h4 {
+    margin: 0 0 10px;
+    color: #23282d;
+}
+
+.fr-timeline-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 13px;
+}
+
+.fr-timeline-detail {
+    margin-bottom: 5px;
+}
+
+.fr-timeline-detail strong {
+    margin-right: 5px;
+    color: #444;
+}
+
+/* Document Details */
+.fr-document-details {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.fr-document-details h3 {
+    margin: 0 0 15px;
+    color: #23282d;
+}
+
+/* Submissions List */
+.fr-submissions-list {
+    margin: 20px 0;
+}
+
+.fr-submissions-filters {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.fr-submissions-filters form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Actions */
+.fr-submission-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .fr-submission-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .fr-submissions-filters form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fr-timeline {
+        padding-left: 20px;
+    }
+
+    .fr-timeline-marker {
+        left: -24px;
+    }
+}

@@ -1,0 +1,213 @@
+/**
+ * Federal Register admin page styles
+ */
+
+/* Settings Section */
+.fr-settings-section {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Submissions Section */
+.fr-submissions-section {
+    margin-top: 30px;
+}
+
+.submissions .column-title {
+    width: 35%;
+}
+
+.submissions .column-document-number {
+    width: 20%;
+}
+
+.submissions .column-status {
+    width: 15%;
+}
+
+.submissions .column-submitted-date,
+.submissions .column-published-date {
+    width: 15%;
+}
+
+/* Status Badges */
+.fr-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.fr-status-draft {
+    background: #e5e5e5;
+    color: #666;
+}
+
+.fr-status-submitted {
+    background: #fff6dd;
+    color: #997404;
+}
+
+.fr-status-published {
+    background: #dcf5dc;
+    color: #166534;
+}
+
+.fr-status-rejected {
+    background: #fde8e8;
+    color: #981b1b;
+}
+
+/* Import Modal */
+.fr-search-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.fr-search-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.fr-search-field input,
+.fr-search-field select {
+    width: 100%;
+}
+
+.fr-search-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.fr-search-actions .spinner {
+    float: none;
+    margin: 4px 10px 0;
+}
+
+/* Preview Modal */
+.fr-preview {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.fr-preview-meta {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.fr-preview-meta p {
+    margin: 5px 0;
+}
+
+.fr-preview-content {
+    line-height: 1.6;
+}
+
+/* Submission Details Modal */
+.fr-submission-details {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.fr-submission-meta {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.fr-submission-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fr-submission-event {
+    position: relative;
+    padding: 15px 0 15px 30px;
+    border-left: 2px solid #ddd;
+}
+
+.fr-submission-event:before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #0073aa;
+}
+
+.fr-submission-event-time {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Help Section */
+.fr-help-section {
+    background: #fff;
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.fr-help-content {
+    max-width: 800px;
+}
+
+.fr-help-content h4 {
+    margin: 20px 0 10px;
+    color: #1d2327;
+}
+
+.fr-help-content ol {
+    margin: 0 0 20px 20px;
+}
+
+.fr-help-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.fr-help-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 782px) {
+    .submissions .column-document-number,
+    .submissions .column-published-date {
+        display: none;
+    }
+
+    .fr-search-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .fr-search-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fr-search-actions button {
+        width: 100%;
+    }
+}

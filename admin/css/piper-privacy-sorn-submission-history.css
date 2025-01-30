@@ -1,0 +1,211 @@
+/**
+ * Federal Register Submission History Styles
+ */
+
+/* History Table */
+.fr-history-table {
+    margin-top: 20px;
+}
+
+.fr-history-table .column-status {
+    width: 120px;
+}
+
+.fr-history-table .column-submitted_at {
+    width: 150px;
+}
+
+.fr-history-table .column-actions {
+    width: 100px;
+    text-align: right;
+}
+
+/* Status Badges */
+.fr-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.fr-status-submitted {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.fr-status-in_review {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.fr-status-approved {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.fr-status-published {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.fr-status-rejected {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.fr-status-error {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+/* Filters */
+.fr-history-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.fr-history-filters .filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.fr-history-filters label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.fr-history-filters select,
+.fr-history-filters input[type="text"],
+.fr-history-filters input[type="date"] {
+    width: 100%;
+}
+
+.fr-history-filters .filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* Audit Log */
+.fr-audit-log {
+    margin: 20px 0;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.fr-audit-header {
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.fr-audit-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.fr-audit-content {
+    padding: 15px;
+    background: #fff;
+}
+
+.fr-audit-timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.fr-audit-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.fr-audit-event {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.fr-audit-event::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #1976d2;
+}
+
+.fr-audit-event.event-error::before {
+    border-color: #d32f2f;
+}
+
+.fr-audit-event.event-published::before {
+    border-color: #2e7d32;
+}
+
+.fr-audit-timestamp {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.fr-audit-message {
+    margin: 0;
+}
+
+/* Export Modal */
+.fr-export-modal .export-options {
+    margin: 20px 0;
+}
+
+.fr-export-modal .export-options label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .fr-history-filters {
+        flex-direction: column;
+    }
+
+    .fr-history-filters .filter-group {
+        width: 100%;
+    }
+
+    .fr-history-table .column-status,
+    .fr-history-table .column-submitted_at,
+    .fr-history-table .column-actions {
+        width: auto;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .fr-history-filters,
+    .fr-history-table .column-actions,
+    .wp-admin #wpcontent #wpbody-content .wrap > .page-title-action {
+        display: none;
+    }
+
+    .fr-status-badge {
+        border: 1px solid #000;
+        background: none !important;
+        color: #000 !important;
+    }
+}

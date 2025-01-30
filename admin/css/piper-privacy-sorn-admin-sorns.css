@@ -1,0 +1,236 @@
+/**
+ * SORN Manager admin styles
+ */
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form styles */
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-field input[type="text"],
+.form-field textarea {
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-field .required {
+    color: #dc3232;
+}
+
+.submit-wrapper {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    position: relative;
+}
+
+.submit-wrapper .spinner {
+    float: none;
+    margin-top: 4px;
+}
+
+/* SORN List Table */
+.wp-list-table .column-title {
+    width: 30%;
+}
+
+.wp-list-table .column-identifier {
+    width: 15%;
+}
+
+.wp-list-table .column-agency {
+    width: 15%;
+}
+
+.wp-list-table .column-status {
+    width: 10%;
+}
+
+.wp-list-table .column-version {
+    width: 10%;
+}
+
+.wp-list-table .column-date {
+    width: 15%;
+}
+
+/* Status indicators */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-draft {
+    background: #e5e5e5;
+    color: #666;
+}
+
+.status-review {
+    background: #fff6dd;
+    color: #997404;
+}
+
+.status-published {
+    background: #dcf5dc;
+    color: #166534;
+}
+
+.status-archived {
+    background: #fde8e8;
+    color: #981b1b;
+}
+
+/* Version History */
+.version-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.version-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.version-item:last-child {
+    border-bottom: none;
+}
+
+.version-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.version-number {
+    font-weight: 600;
+}
+
+.version-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.version-changes {
+    margin: 0;
+    color: #444;
+}
+
+/* Comments */
+.comment-list {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.comment-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    font-weight: 600;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.comment-text {
+    margin: 0;
+    color: #444;
+}
+
+/* Action buttons */
+.row-actions {
+    color: #666;
+}
+
+.row-actions .delete a {
+    color: #dc3232;
+}
+
+/* Search and filter form */
+.search-box {
+    float: right;
+    margin-bottom: 8px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 782px) {
+    .wp-list-table .column-version,
+    .wp-list-table .column-date {
+        display: none;
+    }
+    
+    .modal-content {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        border-radius: 0;
+    }
+}
