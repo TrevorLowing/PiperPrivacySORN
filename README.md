@@ -1,6 +1,6 @@
 # PiperPrivacy SORN Manager
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange.svg)](https://www.mysql.com/)
@@ -183,7 +183,7 @@ composer phpcbf
 
 ## 📝 License
 
-MIT License - see the [LICENSE](LICENSE) file for details.
+This WordPress plugin is licensed under the GPL v2 or later. This is a requirement for WordPress plugins as they are derivative works of WordPress.
 
 ## 🆘 Support
 
