@@ -282,7 +282,7 @@ For security issues:
 
 ### Overview
 
-The PiperPrivacy SORN Manager prioritizes security in handling sensitive government records. This document outlines our security measures and best practices.
+The Varry LLC DBA PiperPrivacy SORN Manager prioritizes security in handling sensitive government records. This document outlines our security measures and best practices.
 
 ### Security Features
 
@@ -517,11 +517,17 @@ wp security check
 
 ## Reporting Security Issues
 
+### Contact Information
+- **Company**: Varry LLC DBA PiperPrivacy
+- **Security Team Lead**: Trevor Lowing, CIO
+- **Email**: security@piperprivacy.com
+
 ### Responsible Disclosure
-1. Email: security@piperprivacy.com
-2. Include detailed report
-3. Allow 48 hours for response
-4. Maintain confidentiality
+1. Email your findings to security@piperprivacy.com
+2. Include detailed steps to reproduce
+3. Allow up to 48 hours for initial response
+4. Maintain confidentiality until resolution
+5. We will keep you updated on the fix progress
 
 ## Compliance
 

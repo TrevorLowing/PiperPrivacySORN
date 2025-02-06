@@ -198,6 +198,17 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 - [FedRAMP Program](https://www.fedramp.gov/)
 - [WordPress Plugin Development](https://developer.wordpress.org/plugins/)
 
+## About PiperPrivacy
+
+PiperPrivacy is a product of Varry LLC, specializing in privacy compliance and automation solutions for government agencies. Our SORN Manager plugin streamlines the process of creating, managing, and publishing System of Records Notices (SORNs) in compliance with the Privacy Act of 1974.
+
+### Company Information
+
+- **Company Name**: Varry LLC DBA PiperPrivacy
+- **Leadership**: Trevor Lowing, Chief Information Officer
+- **Focus**: Privacy Compliance Automation
+- **Target Market**: Federal Agencies and Government Contractors
+
 ---
 
 Made with ❤️ by [PiperPrivacy](https://piperprivacy.com)
