@@ -1,142 +1,186 @@
-# Accessibility Implementation Guide
-## WCAG 2.1 Compliance for PiperPrivacy Plugin
+# ♿ Accessibility Guidelines
 
-### Standards Implementation
+## Overview
 
-#### 1. Perceivable
-- Text Alternatives (1.1)
-  - [ ] All images have meaningful alt text
-  - [ ] Form icons have descriptive labels
-  - [ ] SVG elements include role="img" and aria-label
+The PiperPrivacy SORN Manager is committed to ensuring accessibility for all users, following WCAG 2.1 Level AA standards. This document outlines our accessibility features and implementation guidelines.
 
-- Time-based Media (1.2)
-  - [ ] Progress indicators have text alternatives
-  - [ ] Loading animations have text descriptions
+## WCAG 2.1 Compliance
 
-- Adaptable (1.3)
-  - [ ] Forms maintain logical reading order
-  - [ ] Data tables use proper headers
-  - [ ] Form fields have explicit labels
-  - [ ] No layout-dependent instructions
+### 1. Perceivable
 
-- Distinguishable (1.4)
-  - [ ] Color is not sole means of conveying information
-  - [ ] Minimum contrast ratio of 4.5:1 for normal text
-  - [ ] Text can be resized up to 200%
-  - [ ] No images of text used for UI elements
+#### Text Alternatives
+- All images have meaningful alt text
+- Complex images have detailed descriptions
+- Icons include aria-labels
 
-#### 2. Operable
-- Keyboard Accessible (2.1)
-  - [ ] All functionality available via keyboard
-  - [ ] No keyboard traps
-  - [ ] Custom keyboard shortcuts documented
+#### Time-Based Media
+- Video tutorials include captions
+- Transcripts available for audio content
+- Audio notifications have visual alternatives
 
-- Timing (2.2)
-  - [ ] Auto-save functionality for forms
-  - [ ] Warning before session timeout
-  - [ ] Option to extend session
+#### Adaptable Content
+- Content can be presented in different layouts
+- Responsive design for all screen sizes
+- Maintains meaning in different presentations
 
-- Navigation (2.4)
-  - [ ] Skip links for form sections
-  - [ ] Descriptive page titles
-  - [ ] Focus visible and enhanced
-  - [ ] Meaningful sequence of form fields
+#### Distinguishable
+- Color is not the only means of conveying information
+- Minimum contrast ratio of 4.5:1 for normal text
+- Text can be resized up to 200% without loss of functionality
 
-#### 3. Understandable
-- Readable (3.1)
-  - [ ] Page language specified
-  - [ ] Field-specific language marked
-  - [ ] Technical terms explained
-  - [ ] Abbreviations marked up
+### 2. Operable
 
-- Predictable (3.2)
-  - [ ] Consistent navigation
-  - [ ] Consistent form labeling
-  - [ ] No unexpected changes on input
-  - [ ] Consistent error handling
+#### Keyboard Accessible
+- All functionality available via keyboard
+- No keyboard traps
+- Keyboard shortcuts for common actions
 
-- Input Assistance (3.3)
-  - [ ] Clear error identification
-  - [ ] Labels and instructions for forms
-  - [ ] Error prevention for legal/financial data
-  - [ ] Confirmation for form submission
+#### Timing
+- No time limits for reading or action
+- Auto-refresh can be paused
+- Session timeout warnings with extension option
 
-#### 4. Robust
-- Compatible (4.1)
-  - [ ] Valid HTML5
-  - [ ] ARIA roles and properties
-  - [ ] Status messages with aria-live
-  - [ ] Custom controls with proper roles
+#### Navigation
+- Skip links for main content
+- Clear page titles and headings
+- Multiple ways to find content
+- Current location indicated
 
-### Implementation Tasks
+### 3. Understandable
 
-1. Form Structure Updates
-```html
-<!-- Example of accessible form field -->
-<div class="form-field" role="group" aria-labelledby="field-title">
-  <label id="field-title" for="system-name">System Name</label>
-  <input 
-    type="text" 
-    id="system-name" 
-    name="system_name" 
-    aria-required="true"
-    aria-describedby="system-name-help"
-  >
-  <span id="system-name-help" class="help-text">Enter the name of your system</span>
-  <div id="system-name-error" class="error-message" role="alert" aria-live="polite"></div>
-</div>
-```
+#### Readable
+- Language identified programmatically
+- Technical terms defined inline
+- Abbreviations explained on first use
 
-2. Error Handling
-```javascript
-function showError(fieldId, message) {
-  const errorDiv = document.getElementById(`${fieldId}-error`);
-  errorDiv.textContent = message;
-  errorDiv.setAttribute('role', 'alert');
-  
-  const field = document.getElementById(fieldId);
-  field.setAttribute('aria-invalid', 'true');
-  field.setAttribute('aria-describedby', `${fieldId}-error`);
+#### Predictable
+- Consistent navigation and layout
+- Changes of context are user-initiated
+- Error messages are clear and helpful
+
+#### Input Assistance
+- Form fields have clear labels
+- Required fields clearly marked
+- Error prevention on important submissions
+
+### 4. Robust
+
+#### Compatible
+- Valid HTML5
+- Complete start and end tags
+- ARIA roles and properties used correctly
+
+## Implementation
+
+### Forms
+
+```php
+// Example of accessible form field
+public function render_form_field($field) {
+    ?>
+    <div class="form-group">
+        <label for="<?php echo esc_attr($field['id']); ?>" 
+               class="screen-reader-text">
+            <?php echo esc_html($field['label']); ?>
+            <?php if ($field['required']) : ?>
+                <span class="required" aria-label="required">*</span>
+            <?php endif; ?>
+        </label>
+        <input type="<?php echo esc_attr($field['type']); ?>"
+               id="<?php echo esc_attr($field['id']); ?>"
+               name="<?php echo esc_attr($field['name']); ?>"
+               aria-required="<?php echo $field['required'] ? 'true' : 'false'; ?>"
+               aria-describedby="<?php echo esc_attr($field['id'] . '-help'); ?>"
+               class="regular-text">
+        <p id="<?php echo esc_attr($field['id'] . '-help'); ?>" 
+           class="description">
+            <?php echo esc_html($field['description']); ?>
+        </p>
+    </div>
+    <?php
 }
 ```
 
-3. Progress Indicators
-```html
-<div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-  <div class="progress-bar" style="width: 50%">
-    <span class="sr-only">50% Complete</span>
-  </div>
-</div>
+### Tables
+
+```php
+// Example of accessible data table
+public function render_sorns_table($sorns) {
+    ?>
+    <table role="grid" class="wp-list-table widefat fixed striped">
+        <thead>
+            <tr>
+                <th scope="col" role="columnheader">
+                    <?php esc_html_e('Title', 'piper-privacy-sorn'); ?>
+                </th>
+                <th scope="col" role="columnheader">
+                    <?php esc_html_e('Agency', 'piper-privacy-sorn'); ?>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($sorns as $sorn) : ?>
+                <tr>
+                    <td role="gridcell">
+                        <?php echo esc_html($sorn->title); ?>
+                    </td>
+                    <td role="gridcell">
+                        <?php echo esc_html($sorn->agency); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php
+}
 ```
 
-### Testing Checklist
+### Notifications
 
-1. Screen Reader Testing
-- [ ] NVDA on Windows
-- [ ] VoiceOver on macOS
-- [ ] Test all form interactions
-- [ ] Verify error announcements
-- [ ] Check heading structure
+```php
+// Example of accessible notifications
+public function show_notification($message, $type = 'info') {
+    ?>
+    <div class="notice notice-<?php echo esc_attr($type); ?>"
+         role="alert"
+         aria-live="polite">
+        <p><?php echo esc_html($message); ?></p>
+    </div>
+    <?php
+}
+```
 
-2. Keyboard Navigation
-- [ ] Tab order is logical
-- [ ] Focus indicators are visible
-- [ ] No keyboard traps
-- [ ] Skip links work
+## Testing
 
-3. Color and Contrast
-- [ ] Test with color blindness simulators
-- [ ] Verify contrast ratios
-- [ ] Check focus indicators
-- [ ] Test with high contrast mode
+### Automated Testing
 
-4. Responsive Testing
-- [ ] 200% zoom functionality
-- [ ] Reflow on mobile devices
-- [ ] Touch targets adequate size
-- [ ] No horizontal scrolling
+```bash
+# Run accessibility tests
+npm run test:a11y
 
-### Resources
+# Test specific component
+npm run test:a11y -- --component=SornForm
+```
+
+### Manual Testing
+
+1. Keyboard Navigation
+   - Tab through all interactive elements
+   - Verify focus indicators
+   - Test keyboard shortcuts
+
+2. Screen Reader Testing
+   - Test with NVDA
+   - Test with JAWS
+   - Test with VoiceOver
+
+3. Visual Testing
+   - Test color contrast
+   - Test text resizing
+   - Test responsive layouts
+
+## Resources
+
+- [WordPress Accessibility Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/accessibility-coding-standards/)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [WAI-ARIA Practices](https://www.w3.org/WAI/ARIA/apg/)
-- [WordPress Accessibility Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/accessibility/)
+- [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)

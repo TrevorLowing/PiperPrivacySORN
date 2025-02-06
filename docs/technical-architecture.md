@@ -742,8 +742,8 @@ class PrivacySorn_FederalRegisterArchive {
     private $archive_structure = [
         'base_path' => '/sorn_archives',
         'metadata_index' => 'sorn_metadata.json',
-        'full_text_index' => 'elasticsearch',
-        'vector_store' => 'pinecone'
+        'full_text_index' => 'mysql',
+        'vector_store' => 'mysql'
     ];
     
     // Archive operations
@@ -854,7 +854,7 @@ class PrivacySorn_ContentEnhancer {
 
 #### Data Flow
 ```
-[Federal Register API] -> [Local Archive] -> [Vector Store]
+[Federal Register API] -> [Local Archive] -> [MySQL]
            ↓                     ↓               ↓
     [Metadata Index]    [Full Text Search]  [AI Training]
            ↓                     ↓               ↓
@@ -867,11 +867,11 @@ class PrivacySorn_ContentEnhancer {
 ```php
 [
     'archive_storage' => [
-        'type' => 'distributed_filesystem',
+        'type' => 'relational_database',
         'format' => [
             'raw_documents' => 'JSON',
-            'vector_embeddings' => 'Pinecone',
-            'search_index' => 'Elasticsearch'
+            'vector_embeddings' => 'MySQL',
+            'search_index' => 'MySQL'
         ]
     ],
     'fedramp_catalog' => [
@@ -1134,3 +1134,55 @@ class PrivacySorn_QueryOptimizer {
         ", $query, $query));
     }
 }
+```
+
+### Storage Architecture
+
+The plugin uses MySQL for all data storage needs:
+
+1. SORN Records
+   - Primary storage for all SORN documents
+   - Full-text search capabilities
+   - Metadata and relationships
+
+2. Federal Register Integration
+   - Submission tracking
+   - Document synchronization
+   - Status updates
+
+3. AI Analysis Results
+   - Compliance check results
+   - Semantic analysis data
+   - Improvement suggestions
+
+4. FedRAMP Systems
+   - System catalog
+   - Authorization details
+   - Agency relationships
+
+### Search Implementation
+
+The plugin implements advanced search capabilities using MySQL's full-text search features:
+
+```php
+'search_implementation' => [
+    'engine' => 'mysql',
+    'features' => [
+        'full_text_search' => true,
+        'metadata_search' => true,
+        'agency_filtering' => true
+    ]
+]
+```
+
+### Data Storage Configuration
+
+```php
+'storage' => [
+    'engine' => 'mysql',
+    'features' => [
+        'full_text_indexing' => true,
+        'json_storage' => true,
+        'transaction_support' => true
+    ]
+]

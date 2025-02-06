@@ -1,333 +1,249 @@
-# Development Guide
+# 🛠️ Development Guide
 
-This guide provides detailed information for developers working on the SORN Manager WordPress plugin.
+## Overview
 
-## Development Environment Setup
+This guide provides detailed information for developers working on the PiperPrivacy SORN Manager WordPress plugin. Our goal is to maintain high code quality while making it easy for new contributors to get started.
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-1. Local development environment:
-   - PHP 7.4+
-   - MySQL 5.6+
-   - WordPress 5.0+
-   - Composer
-   - Node.js & npm (for frontend assets)
+- PHP 7.4+
+- MySQL 5.7+
+- WordPress 5.8+
+- Composer
+- Node.js & npm (for frontend assets)
 
-### Installation
+### Initial Setup
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/piper-privacy-sorn.git
-   ```
+```bash
+git clone https://github.com/PiperPrivacy/sorn-manager.git
+cd sorn-manager
+```
 
-2. Install PHP dependencies:
-   ```bash
-   composer install
-   ```
+2. Install dependencies:
+```bash
+composer install
+npm install
+```
 
-3. Install JavaScript dependencies:
-   ```bash
-   cd admin/js
-   npm install
-   ```
+3. Configure environment:
+```bash
+cp .env.example .env
+# Edit .env with your local settings
+```
 
-4. Configure environment:
-   ```bash
-   cp .env.example .env
-   ```
-
-## Code Organization
-
-### Directory Structure
+## 📁 Project Structure
 
 ```
 piper-privacy-sorn/
-├── admin/                    # Admin interface files
+├── admin/                    # Admin interface
 │   ├── css/                 # Admin styles
-│   │   └── piper-privacy-sorn-admin.css
-│   ├── js/                  # Admin JavaScript
-│   │   └── piper-privacy-sorn-admin.js
+│   ├── js/                  # Admin scripts
 │   ├── partials/            # Admin templates
-│   │   ├── piper-privacy-sorn-admin-display.php
-│   │   └── piper-privacy-sorn-admin-settings.php
-│   └── Admin.php            # Admin class
-├── includes/                # Core plugin files
-│   ├── Services/           # Service classes
-│   │   └── GptTrainerApi.php
-│   └── PiperPrivacySorn.php
-├── languages/              # Translation files
-├── public/                 # Public-facing files
-├── tests/                  # Test files
-└── piper-privacy-sorn.php  # Main plugin file
+│   └── class-admin.php      # Admin controller
+├── includes/                # Core functionality
+│   ├── Api/                # REST API endpoints
+│   │   └── RestController.php
+│   ├── Database/           # Database operations
+│   │   ├── AuditTables.php
+│   │   ├── FederalRegisterTables.php
+│   │   └── SornTables.php
+│   ├── Services/           # Business logic
+│   │   ├── AiService.php
+│   │   ├── FederalRegisterService.php
+│   │   ├── SecurityService.php
+│   │   └── SornDownloadService.php
+│   └── Models/             # Data models
+├── tests/                  # Test suite
+│   ├── bootstrap.php
+│   ├── test-ai-service.php
+│   ├── test-federal-register-service.php
+│   ├── test-rest-controller.php
+│   └── test-security-service.php
+└── piper-privacy-sorn.php  # Plugin entry point
 ```
 
-### Key Components
+## 🧪 Testing
 
-#### 1. Core Plugin Class (`PiperPrivacySorn.php`)
-
-Manages plugin initialization and hooks:
-
-```php
-class PiperPrivacySorn {
-    public function __construct() {
-        $this->load_dependencies();
-        $this->set_locale();
-        $this->define_admin_hooks();
-        $this->define_public_hooks();
-    }
-}
-```
-
-#### 2. Admin Class (`Admin.php`)
-
-Handles admin interface and AJAX:
-
-```php
-class Admin {
-    public function __construct($plugin_name, $version) {
-        $this->plugin_name = $plugin_name;
-        $this->version = $version;
-    }
-
-    public function enqueue_scripts() {
-        // Enqueue admin assets
-    }
-}
-```
-
-#### 3. GPT Trainer API (`GptTrainerApi.php`)
-
-Manages API communication:
-
-```php
-class GptTrainerApi {
-    public function make_http_request($method, $endpoint, $data = null) {
-        // Make API requests
-    }
-}
-```
-
-## Development Workflow
-
-### 1. Feature Development
-
-1. Create feature branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. Implement feature following standards:
-   - WordPress coding standards
-   - PSR-4 autoloading
-   - PHPDoc documentation
-
-3. Add tests:
-   ```bash
-   composer test
-   ```
-
-4. Submit pull request
-
-### 2. Testing
-
-#### Unit Tests
+### Running Tests
 
 ```bash
 # Run all tests
 composer test
 
-# Run specific test
-./vendor/bin/phpunit tests/TestCase.php
-```
+# Run specific test suite
+composer test -- --testsuite=unit
+composer test -- --testsuite=integration
 
-#### Integration Tests
-
-```bash
-composer test-integration
-```
-
-#### Code Coverage
-
-```bash
+# Generate coverage report
 composer test-coverage
 ```
 
-### 3. Code Quality
+### Writing Tests
 
-#### Coding Standards
+- Place tests in the `tests/` directory
+- Name test files `test-*.php`
+- Extend `WP_UnitTestCase` for WordPress integration
+- Use data providers for multiple test cases
+
+Example test:
+```php
+class Test_Security_Service extends WP_UnitTestCase {
+    public function test_encrypt_decrypt_data() {
+        $service = new SecurityService();
+        $data = 'sensitive data';
+        $encrypted = $service->encrypt_data($data);
+        $decrypted = $service->decrypt_data($encrypted);
+        $this->assertEquals($data, $decrypted);
+    }
+}
+```
+
+## 🔍 Code Quality
+
+### Coding Standards
+
+We follow WordPress coding standards with some modern PHP additions:
 
 ```bash
 # Check coding standards
-composer run-script phpcs
+composer phpcs
 
-# Fix coding standards
-composer run-script phpcbf
+# Auto-fix coding standards
+composer phpcbf
+
+# Run static analysis
+composer phpstan
 ```
 
-#### Static Analysis
+### Key Principles
 
-```bash
-composer run-script phpstan
-```
+1. **Type Safety**
+   - Use strict types: `declare(strict_types=1);`
+   - Add type hints and return types
+   - Use PHPDoc for complex types
 
-## WordPress Integration
+2. **Object-Oriented Design**
+   - Follow SOLID principles
+   - Use dependency injection
+   - Keep classes focused and small
 
-### 1. Hooks and Filters
+3. **Error Handling**
+   - Use exceptions for exceptional cases
+   - Return WP_Error for WordPress integration
+   - Proper logging and monitoring
 
-#### Actions
+## 🔌 WordPress Integration
+
+### Actions & Filters
 
 ```php
 // Initialize plugin
 do_action('piper_privacy_sorn_init');
 
-// Handle API errors
-do_action('piper_privacy_sorn_api_error', $error_code, $message);
+// Before SORN submission
+do_action('piper_privacy_sorn_before_submit', $sorn_id);
+
+// After SORN submission
+do_action('piper_privacy_sorn_after_submit', $sorn_id, $result);
+
+// Filter SORN content
+$content = apply_filters('piper_privacy_sorn_content', $content, $sorn_id);
 ```
 
-#### Filters
+### Database Operations
+
+Use our custom table classes:
 
 ```php
-// Modify API headers
-$headers = apply_filters('piper_privacy_sorn_api_headers', $headers);
+// Create tables
+$audit_tables = new AuditTables();
+$audit_tables->init();
 
-// Modify API response
-$response = apply_filters('piper_privacy_sorn_api_response', $response);
-```
-
-### 2. Admin Pages
-
-1. Register admin menu:
-   ```php
-   add_menu_page(
-       'SORN Manager',
-       'SORN Manager',
-       'manage_options',
-       $this->plugin_name
-   );
-   ```
-
-2. Register settings:
-   ```php
-   register_setting(
-       'piper_privacy_sorn_options',
-       'gpt_trainer_api_token'
-   );
-   ```
-
-### 3. AJAX Handlers
-
-```php
-add_action('wp_ajax_create_data_source', [$this, 'ajax_create_data_source']);
-```
-
-## Security
-
-### 1. Input Validation
-
-```php
-// Sanitize input
-$input = sanitize_text_field($_POST['input']);
-
-// Validate nonce
-check_ajax_referer('piper_privacy_sorn_nonce', 'nonce');
-
-// Check capabilities
-if (!current_user_can('manage_options')) {
-    wp_die();
-}
-```
-
-### 2. Output Escaping
-
-```php
-// Escape HTML
-echo esc_html($text);
-
-// Escape attributes
-echo esc_attr($value);
-
-// Escape URLs
-echo esc_url($url);
-```
-
-### 3. API Security
-
-```php
-// Secure API token storage
-update_option('gpt_trainer_api_token', $token);
-
-// Secure API requests
-wp_remote_request($url, [
-    'headers' => [
-        'Authorization' => 'Bearer ' . $token
+// Use WordPress's $wpdb
+global $wpdb;
+$wpdb->insert(
+    $wpdb->prefix . 'piper_privacy_sorns',
+    [
+        'title' => $title,
+        'content' => $content,
+        'status' => 'draft'
     ]
-]);
+);
 ```
 
-## Deployment
+## 🔒 Security
 
-### 1. Version Management
+### Best Practices
 
-```php
-// Update version in main plugin file
-define('PIPER_PRIVACY_SORN_VERSION', '1.0.0');
+1. **Data Validation**
+   - Sanitize inputs using WordPress functions
+   - Validate data types and ranges
+   - Escape output appropriately
+
+2. **Authentication & Authorization**
+   - Use WordPress capabilities system
+   - Implement nonce checks
+   - Verify user permissions
+
+3. **Sensitive Data**
+   - Use encryption for sensitive data
+   - Implement audit logging
+   - Follow privacy regulations
+
+## 📦 Deployment
+
+### Version Management
+
+1. Update version numbers:
+   - `piper-privacy-sorn.php`
+   - `readme.txt`
+   - `package.json`
+
+2. Update changelog:
+   - Add version section
+   - List all changes
+   - Credit contributors
+
+### Release Process
+
+1. Create release branch:
+```bash
+git checkout -b release/1.0.0
 ```
 
-### 2. Release Process
-
-1. Update changelog
-2. Update version numbers
-3. Run tests
-4. Build release package
-5. Deploy to WordPress.org
-
-### 3. Database Updates
-
-```php
-// Register activation hook
-register_activation_hook(__FILE__, [$this, 'activate']);
-
-// Handle database updates
-public function update_database() {
-    $current_version = get_option('piper_privacy_sorn_db_version');
-    if ($current_version < PIPER_PRIVACY_SORN_VERSION) {
-        // Perform updates
-    }
-}
+2. Run final checks:
+```bash
+composer test
+composer phpcs
+composer phpstan
 ```
 
-## Troubleshooting
-
-### 1. Debug Mode
-
-```php
-if (WP_DEBUG) {
-    $this->log_debug_message('Debug info');
-}
+3. Build assets:
+```bash
+npm run build
 ```
 
-### 2. Error Logging
+4. Create GitHub release:
+   - Tag version
+   - Upload build
+   - Update documentation
 
-```php
-error_log('Error message');
-```
+## 🤝 Contributing
 
-### 3. Common Issues
+1. Fork the repository
+2. Create feature branch
+3. Make changes
+4. Add/update tests
+5. Submit pull request
 
-1. API Connection:
-   - Check API token
-   - Verify SSL certificates
-   - Check server connectivity
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for detailed guidelines.
 
-2. WordPress Integration:
-   - Check plugin activation
-   - Verify WordPress version
-   - Check PHP version
+## 📚 Additional Resources
 
-## Support
-
-For development support:
-
-1. Check documentation
-2. Submit GitHub issues
-3. Contact development team
+- [WordPress Plugin Handbook](https://developer.wordpress.org/plugins/)
+- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
+- [Federal Register API Documentation](https://www.federalregister.gov/developers/api/v1)
+- [Project Documentation](https://docs.piperprivacy.com)

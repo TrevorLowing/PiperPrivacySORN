@@ -30,28 +30,24 @@ class FederalRegisterTables {
         $table_name = $wpdb->prefix . 'piper_privacy_sorn_fr_submissions';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique submission ID',
-            sorn_id bigint(20) unsigned NOT NULL COMMENT 'Associated SORN record ID',
-            submission_id varchar(100) NOT NULL COMMENT 'Federal Register submission ID',
-            document_number varchar(100) DEFAULT NULL COMMENT 'Published document number',
-            status varchar(50) NOT NULL DEFAULT '" . self::STATUS_SUBMITTED . "' COMMENT 'Submission status',
-            submitted_at datetime NOT NULL COMMENT 'Initial submission timestamp',
-            published_at datetime DEFAULT NULL COMMENT 'Publication timestamp',
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            sorn_id bigint(20) unsigned NOT NULL,
+            submission_id varchar(100) NOT NULL,
+            document_number varchar(100) DEFAULT NULL,
+            status varchar(50) NOT NULL DEFAULT 'submitted',
+            submitted_at datetime NOT NULL,
+            published_at datetime DEFAULT NULL,
             created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
             KEY sorn_id (sorn_id),
             KEY submission_id (submission_id),
             KEY document_number (document_number),
-            KEY status (status),
-            KEY sorn_status (sorn_id, status)
-        ) ENGINE=InnoDB $charset_collate;";
+            KEY status (status)
+        ) $charset_collate;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        $result = dbDelta($sql);
-        if (empty($result)) {
-            error_log('Failed to create submissions table: ' . $wpdb->last_error);
-        }
+        dbDelta($sql);
     }
 
     /**
@@ -64,21 +60,18 @@ class FederalRegisterTables {
         $table_name = $wpdb->prefix . 'piper_privacy_sorn_fr_submission_events';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Event ID',
-            submission_id varchar(100) NOT NULL COMMENT 'Associated submission ID',
-            event_type varchar(50) NOT NULL COMMENT 'Event type identifier',
-            event_data longtext DEFAULT NULL COMMENT 'Serialized event payload',
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            submission_id varchar(100) NOT NULL,
+            event_type varchar(50) NOT NULL,
+            event_data longtext DEFAULT NULL,
             created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
             KEY submission_id (submission_id),
             KEY event_type (event_type)
-        ) ENGINE=InnoDB $charset_collate;";
+        ) $charset_collate;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        $result = dbDelta($sql);
-        if (empty($result)) {
-            error_log('Failed to create submission events table: ' . $wpdb->last_error);
-        }
+        dbDelta($sql);
     }
 
     /**
@@ -91,32 +84,24 @@ class FederalRegisterTables {
         $table_name = $wpdb->prefix . 'piper_privacy_sorn_fr_submission_archives';
 
         $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-            id bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Archive ID',
-            submission_id varchar(100) NOT NULL COMMENT 'Associated submission ID',
-            sorn_id bigint(20) unsigned NOT NULL COMMENT 'Related SORN record ID',
-            data longtext NOT NULL COMMENT 'Serialized submission data',
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+            submission_id varchar(100) NOT NULL,
+            sorn_id bigint(20) unsigned NOT NULL,
+            data longtext NOT NULL,
             created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY  (id),
             KEY submission_id (submission_id),
             KEY sorn_id (sorn_id)
-        ) ENGINE=InnoDB $charset_collate;";
+        ) $charset_collate;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        $result = dbDelta($sql);
-        if (empty($result)) {
-            error_log('Failed to create submission archives table: ' . $wpdb->last_error);
-        }
+        dbDelta($sql);
     }
 
     /**
      * Drop Federal Register related tables
      */
     public function drop(): void {
-        if (!current_user_can('delete_plugins')) {
-            error_log('Security violation: Unauthorized table drop attempt');
-            return;
-        }
-
         global $wpdb;
 
         $tables = [
